@@ -17,9 +17,9 @@ export class SalaCineService {
     }
 
     async getSalasCine() {
-        console.log('getSalasCine');
+
         const salasCine = await salaCineRepository.findAll();
-        console.log(salasCine);
+
         return salasCine;
     }
 
@@ -53,10 +53,9 @@ export class SalaCineService {
     }
 
     async checkSalaAvailabilityByName(salaNombre: string) {
-        console.log('checkSalaAvailabilityByName');
-        console.log(salaNombre);
+
         const sala = await salaCineRepository.findOne({ nombre: salaNombre, estado: 1 } );
-        console.log(sala);
+
         if (!sala) {
             return "Sala no encontrada";
         }

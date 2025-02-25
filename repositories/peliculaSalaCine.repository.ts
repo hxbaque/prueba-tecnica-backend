@@ -9,7 +9,7 @@ export class PeliculaSalaCineRepository {
 
     async findAll(filters?: any) {
         const findAll =await PeliculaSalaCine.findAll({ where: { ...filters } });
-        console.log(findAll);
+
         return findAll;
         
     }
@@ -33,9 +33,7 @@ export class PeliculaSalaCineRepository {
     }
     
     async findPeliculasByNameAndSala(name: string, idSala: number) {
-        console.log('findPeliculasByNameAndSala');
-        console.log(name);
-        console.log(idSala);
+
         return await PeliculaSalaCine.findAll({
             where: {
                 id_sala_cine: idSala,
@@ -43,7 +41,7 @@ export class PeliculaSalaCineRepository {
                 estado: 1 
             },
             include: [{ model: Pelicula, required: true }, { model: SalaCine, required: true }],
-            logging: console.log,
+
         });
     }
 

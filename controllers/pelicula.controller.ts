@@ -8,7 +8,7 @@ export class PeliculaController {
     create = async (req: Request, res: Response) => {
     try {
         const { error } = validatePelicula(req.body);
-        console.log(req.body)
+
         if (error) {
             return res.status(400).json({ message: error.details[0].message }); // Agregar return
         }
