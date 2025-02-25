@@ -4,42 +4,40 @@ import SalaCine from './salaCine.model';
 import Pelicula from './pelicula.model';
 
 export class PeliculaSalaCine extends Model {
-    public id!: number;
-    public fechaPublicacion!: Date;
-    public fechaFin!: Date;
-    public idSalaCine!: number;
-    public idPelicula!: number;
-    public estado!: number; 
+
 }
 
 PeliculaSalaCine.init({
-    id: {
+    id_pelicula_sala: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+        field: 'id_pelicula_sala',  
     },
-    fechaPublicacion: {
+    fecha_publicacion: {
         type: DataTypes.DATE,
         allowNull: false,
+        field: 'fecha_publicacion',  
     },
-    fechaFin: {
+    fecha_fin: {
         type: DataTypes.DATE,
         allowNull: false,
+        field: 'fecha_fin',  
     },
-    idSalaCine: {
+    id_sala_cine: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: SalaCine,
-            key: 'id_sala', 
+            key: 'id_sala',  
         },
     },
-    idPelicula: {
+    id_pelicula: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: Pelicula,
-            key: 'id_pelicula', 
+            key: 'id_pelicula',  
         },
     },
     estado: {
@@ -52,7 +50,7 @@ PeliculaSalaCine.init({
     },
 }, {
     sequelize,
-    tableName: 'PELICULA_SALACINE',
+    tableName: 'pelicula_salacine',  
     timestamps: false, 
 });
 

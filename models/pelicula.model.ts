@@ -2,10 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../config/database';
 
 class Pelicula extends Model {
-  public id_pelicula!: number;
-  public nombre!: string;
-  public duracion!: number;
-  public estado!: number; 
+
 }
 
 Pelicula.init(
@@ -34,7 +31,7 @@ Pelicula.init(
   },
   {
     sequelize,
-    tableName: 'PELICULA',
+    tableName: 'pelicula',
     timestamps: false, 
   }
 );

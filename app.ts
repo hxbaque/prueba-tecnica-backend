@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import router from './routes/app.routes'
+import cors from 'cors';
 import { sequelize, connectDB } from './config/database';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
@@ -32,7 +33,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+app.use(cors({
+    origin: '*',
+    methods: 'GET,POST,PUT,DELETE',
+    allowedHeaders: 'Content-Type,Authorization'
+}));
 app.use('/api', router);
 
 connectDB()

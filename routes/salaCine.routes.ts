@@ -176,6 +176,6 @@ router.delete('/:id', salaCineController.delete);
  *       404:
  *         description: Sala no encontrada
  */
-router.get('/:id/check-availability', salaCineController.checkAvailability);
+router.get('/check-availability/:nombre', salaCineController.checkAvailability);
 
 export default router;

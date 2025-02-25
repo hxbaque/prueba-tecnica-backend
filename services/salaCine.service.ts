@@ -16,7 +16,10 @@ export class SalaCineService {
     }
 
     async getSalasCine() {
-        return salaCineRepository.findAll();
+        console.log('getSalasCine');
+        const salasCine = await salaCineRepository.findAll();
+        console.log(salasCine);
+        return salasCine;
     }
 
     async getSalaCineById(id: number) {
@@ -48,9 +51,18 @@ export class SalaCineService {
         return salaCineRepository.delete(id);
     }
 
-    async checkSalaAvailability(id: number) {
-        const peliculas = await peliculaSalaCineRepository.findAll({ idSalaCine: id }); 
+    async checkSalaAvailabilityByName(salaNombre: string) {
+        console.log('checkSalaAvailabilityByName');
+        console.log(salaNombre);
+        const sala = await salaCineRepository.findOne({ nombre: salaNombre, estado: 1 } );
+        console.log(sala);
+        if (!sala) {
+            return "Sala no encontrada";
+        }
+    
+        const peliculas = await peliculaSalaCineRepository.findAll({ id_sala_cine: sala.id_sala });
         const count = peliculas.length;
+    
         if (count < 3) {
             return "Sala disponible";
         } else if (count <= 5) {

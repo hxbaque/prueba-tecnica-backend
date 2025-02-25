@@ -8,25 +8,48 @@ export class SalaCineRepository {
     async findAll() {
         return SalaCine.findAll({
             where: {
-                estado: 1 
-            }
+                estado: 1,  
+            },
         });
     }
+    async findOne(filters: any) {
+        try {
+            if (!filters || typeof filters !== 'object') {
+                throw new Error('Los filtros deben ser un objeto válido');
+            }
+            const cleanFilters = {
+                nombre: String(filters.nombre),
+                estado: Number(filters.estado),
+            };
+;
+            const salaCine = await SalaCine.findOne({ where: cleanFilters });
+            
+            return salaCine;
+        } catch (error) {
+            console.error('Error al buscar sala:', error);
+        }
+    }
+    
+    
 
     async findById(id: number) {
-        return SalaCine.findByPk(id);
+        return SalaCine.findByPk(id);  
     }
 
     async update(id: number, data: any) {
         const salaCine = await this.findById(id);
-        return salaCine?.update(data);
+        if (salaCine) {
+            return salaCine.update(data);
+        }
+        throw new Error('Sala de cine no encontrada'); // Manejo de error si no se encuentra
     }
 
     async delete(id: number) {
         const salaCine = await this.findById(id);
         if (salaCine) {
-            return salaCine.update({ estado: 0 });
+            return salaCine.update({ estado: 0 }); // Cambiado a mayúsculas
         }
-        return null; 
+        throw new Error('Sala de cine no encontrada'); // Manejo de error si no se encuentra
     }
 }
+export default SalaCineRepository;

@@ -2,33 +2,33 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/database';
 
 export class SalaCine extends Model {
-    public id!: number;
-    public nombre!: string;
-    public estado!: number;
+    
 }
 
 SalaCine.init({
-    id: {
+    id_sala: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        field: 'id_sala', 
+        field: 'id_sala',  
     },
     nombre: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255), 
         allowNull: false,
+        field: 'nombre',  
     },
     estado: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-            isIn: [[0, 1]], // Valida que el estado sea 0 o 1
+            isIn: [[0, 1]], 
         },
+        field: 'estado',  
     },
 }, {
     sequelize,
-    tableName: 'SALA_CINE',
-    timestamps: false, // Si no necesitas campos de tiempo como createdAt y updatedAt
+    tableName: 'sala_cine', 
+    timestamps: false, 
 });
 
 export default SalaCine;

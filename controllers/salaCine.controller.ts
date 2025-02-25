@@ -20,6 +20,7 @@ export class SalaCineController {
     getAll = async (req: Request, res: Response) => {
         try {
             const salasCine = await salaCineService.getSalasCine();
+            console.log(salasCine);
             res.json(salasCine);
         } catch (error) {
             res.status(500).json({ message: 'Error al obtener las salas de cine' }); 
@@ -67,7 +68,7 @@ export class SalaCineController {
 
     checkAvailability = async (req: Request, res: Response) => {
         try {
-            const message = await salaCineService.checkSalaAvailability(Number(req.params.id));
+            const message = await salaCineService.checkSalaAvailabilityByName(String(req.params.nombre));
             res.json({ message });
         } catch (error) {
             if (error instanceof Error) {

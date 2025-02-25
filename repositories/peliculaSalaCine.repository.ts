@@ -4,15 +4,19 @@ import SalaCine from '../models/salaCine.model';
 
 export class PeliculaSalaCineRepository {
     async create(data: any) {
-        return PeliculaSalaCine.create(data);
+        return await PeliculaSalaCine.create(data);
     }
 
     async findAll(filters?: any) {
-        return PeliculaSalaCine.findAll({ where: { ...filters, estado: 1 } }); 
+        const findAll =await PeliculaSalaCine.findAll({ where: { ...filters } });
+        console.log(findAll);
+        return findAll;
+        
     }
 
     async findById(id: number) {
-        return PeliculaSalaCine.findOne({ where: { id, estado: 1 } }); 
+        const findById = await PeliculaSalaCine.findOne({ where: { id } });
+        return findById;
     }
 
     async update(id: number, data: any) {
@@ -23,7 +27,7 @@ export class PeliculaSalaCineRepository {
     async delete(id: number) {
         const peliculaSalaCine = await this.findById(id);
         if (peliculaSalaCine) {
-            return peliculaSalaCine.update({ estado: 0 });
+            return await peliculaSalaCine.update({ estado: 0 });
         }
         return null; 
     }

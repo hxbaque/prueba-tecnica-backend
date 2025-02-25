@@ -6,18 +6,19 @@ const peliculaService = new PeliculaService();
 
 export class PeliculaController {
     create = async (req: Request, res: Response) => {
-        try {
-            const { error } = validatePelicula(req.body);
-            if (error) {
-                 res.status(400).json({ message: error.details[0].message });
-            }
-
-            const pelicula = await peliculaService.createPelicula(req.body);
-             res.status(201).json(pelicula); 
-        } catch (err) {
-             res.status(500).json({ message: 'Error al crear la película', error: (err as Error).message });
+    try {
+        const { error } = validatePelicula(req.body);
+        console.log(req.body)
+        if (error) {
+            return res.status(400).json({ message: error.details[0].message }); // Agregar return
         }
-    }
+
+        const pelicula = await peliculaService.createPelicula(req.body);
+        return res.status(201).json(pelicula); 
+    } catch (err) {
+        return res.status(500).json({ message: 'Error al crear la película', error: (err as Error).message });
+        }
+    };
 
     getAll = async (req: Request, res: Response) => {
         try {

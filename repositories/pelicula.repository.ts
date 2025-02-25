@@ -2,11 +2,11 @@ import Pelicula from '../models/pelicula.model';
 
 export class PeliculaRepository {
     async create(data: any) {
-        return Pelicula.create(data);
+        return await Pelicula.create(data);
     }
 
     async findAll() {
-        return Pelicula.findAll({
+        return await Pelicula.findAll({
             where: {
                 estado: 1 
             }
@@ -14,7 +14,7 @@ export class PeliculaRepository {
     }
 
     async findById(id: number) {
-        return Pelicula.findByPk(id);
+        return await Pelicula.findByPk(id);
     }
 
     async update(id: number, data: any) {
@@ -26,7 +26,7 @@ export class PeliculaRepository {
         const pelicula = await this.findById(id);
         if (pelicula) {
             
-            return pelicula.update({ estado: 0 });
+            return await pelicula.update({ estado: 0 });
         }
         return null; 
     }
