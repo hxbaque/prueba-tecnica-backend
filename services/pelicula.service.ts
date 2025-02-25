@@ -32,4 +32,13 @@ export class PeliculaService {
     async deletePelicula(id: number) {
         return peliculaRepository.delete(id);
     }
+    async obtenerPeliculasYConteoPorFecha(fecha: string) {
+        const peliculas = await peliculaRepository.obtenerPeliculasPorFecha;
+        const cantidad = await peliculaRepository.contarPeliculasPorFecha(fecha);
+    
+        return {
+          cantidad,
+          peliculas,
+        };
+      }
 }

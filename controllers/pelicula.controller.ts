@@ -31,13 +31,14 @@ export class PeliculaController {
 
     getById = async (req: Request, res: Response) => {
         try {
+
             const pelicula = await peliculaService.getPeliculaById(Number(req.params.id));
             if (!pelicula) {
-                 res.status(404).json({ message: 'Película no encontrada' }); 
+                 return res.status(404).json({ message: 'Película no encontrada' }); 
             }
-            res.json(pelicula); 
+            return res.json(pelicula); 
         } catch (err) {
-            res.status(500).json({ message: 'Error al obtener la película', error: (err as Error).message });
+            return res.status(500).json({ message: 'Error al obtener la película', error: (err as Error).message });
         }
     }
 
@@ -69,4 +70,18 @@ export class PeliculaController {
             res.status(500).json({ message: 'Error al eliminar la película', error: (err as Error).message });
         }
     }
+
+    getByFechaPublicacion = async (req: Request, res: Response) => {
+        try {
+            const { fecha } = req.body;
+            if (!fecha) {
+                return res.status(400).json({ message: 'La fecha de publicación es requerida' });
+            }
+
+            const resultado = await peliculaService.obtenerPeliculasYConteoPorFecha(fecha as string);
+            return res.json(resultado);
+        } catch (err) {
+            return res.status(500).json({ message: 'Error al obtener películas por fecha de publicación', error: (err as Error).message });
+        }
+    };
 }

@@ -1,5 +1,5 @@
 import Pelicula from '../models/pelicula.model';
-
+import PeliculaSalaCine from '../models/peliculaSalaCine.model';
 export class PeliculaRepository {
     async create(data: any) {
         return await Pelicula.create(data);
@@ -30,4 +30,22 @@ export class PeliculaRepository {
         }
         return null; 
     }
+    
+    async obtenerPeliculasPorFecha(fecha: string) {
+        return await Pelicula.findAll({
+          include: [
+            {
+              model: PeliculaSalaCine,
+              where: { fecha_publicacion: fecha },
+              required: true,
+            },
+          ],
+        });
+      }
+
+    async contarPeliculasPorFecha(fecha: string): Promise<number> {
+        return await PeliculaSalaCine.count({
+          where: { fecha_publicacion: fecha },
+        });
+      }
 }

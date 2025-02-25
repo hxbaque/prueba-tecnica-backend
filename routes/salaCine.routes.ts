@@ -13,25 +13,42 @@ const salaCineController = new SalaCineController();
 
 /**
  * @swagger
- * /api/salas:
+ * components:
+ *   schemas:
+ *     SalaCine:
+ *       type: object
+ *       properties:
+ *         id_sala:
+ *           type: integer
+ *           example: 1
+ *         nombre:
+ *           type: string
+ *           example: "Sala 1"
+ *         estado:
+ *           type: integer
+ *           description: 0 = inactivo, 1 = activo
+ *           example: 1
+ */
+
+/**
+ * @swagger
+ * /salas-cine:
  *   post:
  *     summary: Crea una nueva sala de cine
+ *     tags: [Salas de Cine]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               nombre:
- *                 type: string
- *               capacidad:
- *                 type: integer
- *               estado:
- *                 type: integer
+ *             $ref: '#/components/schemas/SalaCine'
  *     responses:
  *       201:
  *         description: Sala de cine creada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SalaCine'
  *       400:
  *         description: Error de validación
  */
@@ -39,9 +56,10 @@ router.post('/', salaCineController.create);
 
 /**
  * @swagger
- * /api/salas:
+ * /salas-cine:
  *   get:
  *     summary: Obtiene la lista de salas de cine
+ *     tags: [Salas de Cine]
  *     responses:
  *       200:
  *         description: Lista de salas
@@ -50,26 +68,18 @@ router.post('/', salaCineController.create);
  *             schema:
  *               type: array
  *               items:
- *                 type: object
- *                 properties:
- *                   id_sala:
- *                     type: integer
- *                   nombre:
- *                     type: string
- *                   capacidad:
- *                     type: integer
- *                   estado:
- *                     type: integer
+ *                 $ref: '#/components/schemas/SalaCine'
  */
 router.get('/', salaCineController.getAll);
 
 /**
  * @swagger
- * /api/salas/{id}:
+ * /salas-cine/{id_sala}:
  *   get:
  *     summary: Obtiene una sala de cine por ID
+ *     tags: [Salas de Cine]
  *     parameters:
- *       - name: id
+ *       - name: id_sala
  *         in: path
  *         required: true
  *         description: ID de la sala a obtener
@@ -81,16 +91,7 @@ router.get('/', salaCineController.getAll);
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 id_sala:
- *                   type: integer
- *                 nombre:
- *                   type: string
- *                 capacidad:
- *                   type: integer
- *                 estado:
- *                   type: integer
+ *               $ref: '#/components/schemas/SalaCine'
  *       404:
  *         description: Sala no encontrada
  */
@@ -98,11 +99,12 @@ router.get('/:id', salaCineController.getById);
 
 /**
  * @swagger
- * /api/salas/{id}:
+ * /salas-cine/{id_sala}:
  *   put:
  *     summary: Actualiza una sala de cine por ID
+ *     tags: [Salas de Cine]
  *     parameters:
- *       - name: id
+ *       - name: id_sala
  *         in: path
  *         required: true
  *         description: ID de la sala a actualizar
@@ -113,17 +115,14 @@ router.get('/:id', salaCineController.getById);
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               nombre:
- *                 type: string
- *               capacidad:
- *                 type: integer
- *               estado:
- *                 type: integer
+ *             $ref: '#/components/schemas/SalaCine'
  *     responses:
  *       200:
  *         description: Sala actualizada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SalaCine'
  *       400:
  *         description: Error de validación
  *       404:
@@ -133,11 +132,12 @@ router.put('/:id', salaCineController.update);
 
 /**
  * @swagger
- * /api/salas/{id}:
+ * /salas-cine/{id_sala}:
  *   delete:
  *     summary: Elimina una sala de cine por ID
+ *     tags: [Salas de Cine]
  *     parameters:
- *       - name: id
+ *       - name: id_sala
  *         in: path
  *         required: true
  *         description: ID de la sala a eliminar
@@ -153,16 +153,17 @@ router.delete('/:id', salaCineController.delete);
 
 /**
  * @swagger
- * /api/salas/{id}/check-availability:
+ * /salas-cine/check-availability/{nombre_sala}:
  *   get:
  *     summary: Verifica la disponibilidad de una sala de cine
+ *     tags: [Salas de Cine]
  *     parameters:
- *       - name: id
+ *       - name: nombre_sala
  *         in: path
  *         required: true
- *         description: ID de la sala a verificar
+ *         description: nombre de la sala a verificar
  *         schema:
- *           type: integer
+ *           type: string
  *     responses:
  *       200:
  *         description: Disponibilidad de la sala
@@ -171,8 +172,9 @@ router.delete('/:id', salaCineController.delete);
  *             schema:
  *               type: object
  *               properties:
- *                 disponible:
- *                   type: boolean
+ *                 message:
+ *                   type: string
+ *                      example: "Sala disponible"
  *       404:
  *         description: Sala no encontrada
  */
