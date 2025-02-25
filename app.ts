@@ -6,9 +6,9 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
-// Configuración de Swagger
+
 const swaggerOptions = {
     swaggerDefinition: {
         openapi: '3.0.0',
@@ -23,7 +23,7 @@ const swaggerOptions = {
             },
         ],
     },
-    apis: ['./router/*.ts'], 
+    apis: ['./routes/*.ts'], 
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
@@ -32,7 +32,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Rutas
+
 app.use('/api', router);
 
 connectDB()
