@@ -33,17 +33,21 @@ export class PeliculaSalaCineRepository {
     }
     
     async findPeliculasByNameAndSala(name: string, idSala: number) {
-        return PeliculaSalaCine.findAll({
+        console.log('findPeliculasByNameAndSala');
+        console.log(name);
+        console.log(idSala);
+        return await PeliculaSalaCine.findAll({
             where: {
-                idSalaCine: idSala,
+                id_sala_cine: idSala,
                 '$Pelicula.nombre$': name,
                 estado: 1 
             },
             include: [{ model: Pelicula, required: true }, { model: SalaCine, required: true }],
+            logging: console.log,
         });
     }
 
     async countPeliculasByDate(date: Date) {
-        return PeliculaSalaCine.count({ where: { fechaPublicacion: date, estado: 1 } }); // Contar solo registros activos
+        return await PeliculaSalaCine.count({ where: { fecha_publicacion: date, estado: 1 } }); // Contar solo registros activos
     }
 }

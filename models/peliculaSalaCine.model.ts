@@ -48,10 +48,15 @@ PeliculaSalaCine.init({
         },
         defaultValue: 1, 
     },
+    
 }, {
     sequelize,
     tableName: 'pelicula_salacine',  
     timestamps: false, 
 });
+PeliculaSalaCine.belongsTo(Pelicula, { foreignKey: 'id_pelicula' });
+PeliculaSalaCine.belongsTo(SalaCine, { foreignKey: 'id_sala_cine' });
+Pelicula.hasMany(PeliculaSalaCine, { foreignKey: 'id_pelicula' });
+SalaCine.hasMany(PeliculaSalaCine, { foreignKey: 'id_sala_cine' });
 
 export default PeliculaSalaCine;

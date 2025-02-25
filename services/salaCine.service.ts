@@ -1,3 +1,4 @@
+import e from "express";
 import { PeliculaSalaCineRepository } from "../repositories/peliculaSalaCine.repository";
 import { SalaCineRepository } from "../repositories/salaCine.repository";
 import { validateSalaCine } from "../validators/salaCine.validator"; 
@@ -60,9 +61,9 @@ export class SalaCineService {
             return "Sala no encontrada";
         }
     
-        const peliculas = await peliculaSalaCineRepository.findAll({ id_sala_cine: sala.id_sala });
+        const peliculas = await peliculaSalaCineRepository.findAll({ id_sala_cine: sala.id_sala , estado: 1 });
         const count = peliculas.length;
-    
+
         if (count < 3) {
             return "Sala disponible";
         } else if (count <= 5) {

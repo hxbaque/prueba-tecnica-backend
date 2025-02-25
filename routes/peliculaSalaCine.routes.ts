@@ -43,7 +43,7 @@ const peliculaSalaCineController = new PeliculaSalaCineController();
 
 /**
  * @swagger
- * /peliculas-salas-cine
+ * /peliculas-salas-cine:
  *   post:
  *     tags: [Películas en Salas de Cine]
  *     summary: Crea una nueva relación entre película y sala de cine

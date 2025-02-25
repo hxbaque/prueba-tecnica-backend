@@ -153,12 +153,12 @@ router.delete('/:id', salaCineController.delete);
 
 /**
  * @swagger
- * /salas-cine/check-availability/{nombre_sala}:
+ * /salas-cine/check-availability/{nombre}:
  *   get:
  *     summary: Verifica la disponibilidad de una sala de cine
  *     tags: [Salas de Cine]
  *     parameters:
- *       - name: nombre_sala
+ *       - name: nombre
  *         in: path
  *         required: true
  *         description: nombre de la sala a verificar
@@ -174,7 +174,7 @@ router.delete('/:id', salaCineController.delete);
  *               properties:
  *                 message:
  *                   type: string
- *                      example: "Sala disponible"
+ *                   example: "Sala disponible"
  *       404:
  *         description: Sala no encontrada
  */
