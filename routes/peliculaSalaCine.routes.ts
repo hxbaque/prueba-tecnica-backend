@@ -43,7 +43,7 @@ const peliculaSalaCineController = new PeliculaSalaCineController();
 
 /**
  * @swagger
- * /peliculas-salas:
+ * /peliculas-salas-cine
  *   post:
  *     tags: [Películas en Salas de Cine]
  *     summary: Crea una nueva relación entre película y sala de cine
@@ -67,7 +67,7 @@ router.post("/", peliculaSalaCineController.create);
 
 /**
  * @swagger
- * /peliculas-salas:
+ * /peliculas-salas-cine:
  *   get:
  *     tags: [Películas en Salas de Cine]
  *     summary: Obtiene la lista de relaciones entre películas y salas de cine
@@ -82,10 +82,9 @@ router.post("/", peliculaSalaCineController.create);
  *                 $ref: '#/components/schemas/PeliculaSalaCine'
  */
 router.get("/", peliculaSalaCineController.getAll);
-
 /**
  * @swagger
- * /peliculas-salas/{id}:
+ * /peliculas-salas-cine/{id}:
  *   get:
  *     tags: [Películas en Salas de Cine]
  *     summary: Obtiene una relación por ID
@@ -110,7 +109,7 @@ router.get("/:id", peliculaSalaCineController.getById);
 
 /**
  * @swagger
- * /peliculas-salas/{id}:
+ * /peliculas-salas-cine/{id}:
  *   put:
  *     tags: [Películas en Salas de Cine]
  *     summary: Actualiza una relación por ID
@@ -143,7 +142,7 @@ router.put("/:id", peliculaSalaCineController.update);
 
 /**
  * @swagger
- * /peliculas-salas/{id}:
+ * /peliculas-salas-cine/{id}:
  *   delete:
  *     tags: [Películas en Salas de Cine]
  *     summary: Elimina una relación por ID
@@ -164,7 +163,7 @@ router.delete("/:id", peliculaSalaCineController.delete);
 
 /**
  * @swagger
- * /peliculas-salas/find/{name}/{idSala}:
+ * /peliculas-salas-cine/find/{name}/{idSala}:
  *   get:
  *     tags: [Películas en Salas de Cine]
  *     summary: Busca relaciones por nombre de película y ID de sala
@@ -197,7 +196,7 @@ router.get("/find/:name/:idSala", peliculaSalaCineController.findByNameAndSala);
 
 /**
  * @swagger
- * /peliculas-salas/count/{date}:
+ * /peliculas-salas-cine/count/{date}:
  *   get:
  *     tags: [Películas en Salas de Cine]
  *     summary: Cuenta relaciones por fecha

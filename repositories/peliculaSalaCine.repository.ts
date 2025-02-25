@@ -15,7 +15,7 @@ export class PeliculaSalaCineRepository {
     }
 
     async findById(id: number) {
-        const findById = await PeliculaSalaCine.findOne({ where: { id } });
+        const findById = await PeliculaSalaCine.findByPk(id);
         return findById;
     }
 
